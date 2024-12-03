@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* Base Styles */
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #f0f8ff;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      h1 {
+        color: #2c3e50;
+        margin-top: 20px;
+        font-size: 2rem;
+        text-shadow: 1px 1px 2px #95a5a6;
+      }
+
+      input[type="number"] {
+        padding: 10px;
+        width: 80%;
+        max-width: 300px;
+        margin: 20px 0;
+        font-size: 1rem;
+        border: 2px solid #3498db;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+
+      button {
+        padding: 10px 20px;
+        width: 80%;
+        max-width: 200px;
+        background-color: #3498db;
+        color: white;
+        font-size: 1rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+      }
+
+      button:hover {
+        background-color: #2980b9;
+      }
+
+      p {
+        font-size: 1rem;
+        color: #34495e;
+        margin: 10px 0;
+      }
+
+      #result {
+        margin-top: 20px;
+        font-weight: bold;
+        font-size: 1.2rem;
+      }
+
+      #score {
+        margin-top: 10px;
+        font-size: 1.1rem;
+        color: #e74c3c;
+      }
+
+      /* Media Queries */
+
+      /* For tablets (600px - 768px) */
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 1.8rem;
+        }
+
+        input[type="number"] {
+          font-size: 0.9rem;
+        }
+
+        button {
+          font-size: 0.9rem;
+          padding: 8px 16px;
+        }
+
+        p {
+          font-size: 0.9rem;
+        }
+      }
+
+      /* For mobile devices (599px and below) */
+      @media (max-width: 599px) {
+        h1 {
+          font-size: 1.5rem;
+        }
+
+        input[type="number"] {
+          width: 90%;
+          font-size: 0.8rem;
+        }
+
+        button {
+          width: 90%;
+          font-size: 0.8rem;
+          padding: 6px 14px;
+        }
+
+        p {
+          font-size: 0.8rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Guess The Number is 1 to 10</h1>
+    <input type="number" id="guessNumber" />
+    <button onclick="update()">Check</button>
+    <p id="score">Your score is 10</p>
+    <p id="result">Correct or Wrong</p>
+
+    <script>
+      // select the element
+      var guessNumber = document.getElementById("guessNumber");
+      var score = document.getElementById("score");
+      var result = document.getElementById("result");
+      //random number 1 to 10
+      var random = Math.floor(Math.random() * 10) + 1;
+      console.log(random);
+      //point
+      var point = 10;
+      //create update function
+      function update() {
+        var enterNumber = guessNumber.value;
+        if (enterNumber > 0 && enterNumber < 11) {
+          if (enterNumber == random) {
+            result.textContent = "Correct";
+            alert("YOU WIN! YOUR SCORE IS " + point);
+            console.log("Correct");
+            restartGame();
+          } else {
+            point = point - 1;
+            score.textContent = "Your Score is " + point;
+            result.textContent = "Wrong";
+            console.log("Wrong");
+            if (point <= 0) {
+              alert("GAME OVER");
+              restartGame();
+            }
+          }
+        } else {
+          alert("Please Enter a Number between 1 to 10");
+          restartGame();
+        }
+      }
+      //update function end
+      function restartGame() {
+        random = Math.floor(Math.random() * 10) + 1; //new random number
+        point = 10; // reset the poiny
+        score.textContent = "Your Score is 10"; // reset the score display
+        guessNumber.value = ""; // clear input field
+        result.textContent = "Correct or Wrong"; // reset the result
+      }
+    </script>
+  </body>
+</html>
